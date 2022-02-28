@@ -12,7 +12,7 @@
 	<artifactId>training</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>training</name>
-	<description>Demo project for Spring Jpa</description>
+	<description>Demo project for Spring</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
