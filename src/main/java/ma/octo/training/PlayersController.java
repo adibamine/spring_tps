@@ -1,24 +1,28 @@
 package ma.octo.training;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class PlayersController {
 
     @Autowired
-    PlayerRepository repository;
+    private PlayerRepository repository;
 
     @GetMapping("/search")
-    public String Players(@RequestParam(name = "club", defaultValue = "LIVERPOOL") Clubs club, Model model) {
-        List<Player> players = repository.findByClub(club);
-        model.addAttribute("players", players);
-        return "players";
+    public List<Player> Players(@RequestParam(name = "club", defaultValue = "LIVERPOOL") String club) {
+        if (!Clubs.hasClub(club)) {
+            throw new ClubNotFoundException();
+        }
+        List<Player> players = repository.findByClub(Clubs.valueOf(club));
+        if (players.isEmpty()) {
+            throw new PlayersNotFoundException();
+        }
+        return players;
     }
 
 }
