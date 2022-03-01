@@ -11,14 +11,4 @@ public enum Clubs {
         this.label = label;
     }
 
-    public static boolean hasClub(String club) {
-
-        for (Clubs c : Clubs.values()) {
-            if (c.name().equals(club)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
 }

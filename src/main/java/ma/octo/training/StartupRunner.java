@@ -17,7 +17,6 @@ public class StartupRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
-        // save a few customers
         log.info("creating players START");
         repository.save(new Player("Cristiano", "Ronaldo", Clubs.MANCHESTER_UNITED));
         repository.save(new Player("Lionel", "Messi", Clubs.PSG));
@@ -28,5 +27,28 @@ public class StartupRunner implements ApplicationRunner {
         repository.save(new Player("Sadio", "Mané", Clubs.LIVERPOOL));
         repository.save(new Player("Karim", "Benzema", Clubs.REAL_MADRID));
         log.info("creating players END");
+
+        // fetch all players
+        log.info("Players found with findAll():");
+        log.info("-------------------------------");
+        for (Player player : repository.findAll()) {
+            log.info(player.toString());
+        }
+        log.info("");
+
+        // fetch an individual player by ID
+        Player player = repository.findById(1L);
+        log.info("Player found with findById(1L):");
+        log.info("--------------------------------");
+        log.info(player.toString());
+        log.info("");
+
+        // fetch players by club
+        log.info("Player found with findByClub('PSG'):");
+        log.info("--------------------------------------------");
+        repository.findByClub(Clubs.PSG).forEach(bauer -> {
+            log.info(bauer.toString());
+        });
+
     }
 }
