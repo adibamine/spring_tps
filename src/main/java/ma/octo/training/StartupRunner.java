@@ -29,26 +29,15 @@ public class StartupRunner implements ApplicationRunner {
         log.info("creating players END");
 
         // fetch all players
-        log.info("Players found with findAll():");
-        log.info("-------------------------------");
-        for (Player player : repository.findAll()) {
-            log.info(player.toString());
-        }
+
         log.info("");
 
         // fetch an individual player by ID
-        Player player = repository.findById(1L);
-        log.info("Player found with findById(1L):");
-        log.info("--------------------------------");
-        log.info(player.toString());
+
         log.info("");
 
         // fetch players by club
-        log.info("Player found with findByClub('PSG'):");
-        log.info("--------------------------------------------");
-        repository.findByClub(Clubs.PSG).forEach(bauer -> {
-            log.info(bauer.toString());
-        });
+
 
     }
 }
