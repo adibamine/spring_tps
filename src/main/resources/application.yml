@@ -1,0 +1,13 @@
+spring:
+  config:
+    activate:
+      on-profile: default
+database:
+  url: http://localDB:8080
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+database:
+  url: http://prodDb:8080
