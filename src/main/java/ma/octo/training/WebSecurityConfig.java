@@ -10,11 +10,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //TODO:: IMPLEMENT
+        auth.inMemoryAuthentication()
+                .withUser("user1").password("{noop}password1").roles("USER")
+                .and()
+                .withUser("user2").password("{noop}password2").roles("ADMIN");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //TODO:: IMPLEMENT
+        http.authorizeRequests()
+                .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/user").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/").permitAll()
+                .and().formLogin();
     }
 }
